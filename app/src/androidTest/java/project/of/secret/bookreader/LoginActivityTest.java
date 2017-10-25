@@ -2,6 +2,8 @@ package project.of.secret.bookreader;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,9 +15,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class LoginActivityTest {
     @Rule
-    public ActivityTestRule<MainActivity> testRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LoginActivity> testRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Before
     public void setUp() throws Exception {
@@ -28,7 +30,9 @@ public class MainActivityTest {
     @Test
     public void appNameTest() throws Exception {
         String appName = testRule.getActivity().getResources().getString(R.string.app_name);
-        assertThat("failed", appName, is("소설 리더기"));
+        TextView editText = testRule.getActivity().findViewById(R.id.textView);
+
+        assertThat("failed", editText.getText().toString(), is(appName));
     }
 
 }

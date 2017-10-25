@@ -3,7 +3,7 @@ package project.of.secret.bookreader;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 public class SampleTest {
     private Calculator calculator;
@@ -16,7 +16,7 @@ public class SampleTest {
     @Test
     public void test() throws Exception {
         int result = calculator.add(11, 12);
-        assertFalse("must be false", true);
+        assertEquals(result, 23);
     }
 
 }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "project.of.secret.bookreader"
         minSdkVersion 15
@@ -17,6 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
+
+    productFlavors {
+        dev {
+            applicationIdSuffix '.dev'
+            aaptOptions.cruncherEnabled = false
+            resConfigs "ko", "xxhdpi"
+            versionCode 100
+            dimension "default"
+        }
+        rel {
+            dimension "default"
+        }
+    }
+
+    android.variantFilter { variant ->
+        def flavorName = variant.getFlavors().get(0).name;
+        splits.abi.enable = (flavorName == 'rel');
+    }
 }
 
 dependencies {
@@ -27,4 +46,7 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    // view binding library
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
